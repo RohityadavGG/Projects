@@ -17,7 +17,7 @@ A visual effect where an image follows the cursor with a shiny gradient and holo
 
 ---
 
-## 📁 2. Chatbot UI
+## 📁 2. ChatBot UI
 
 **Folder:** `chatbot-ui`
 
