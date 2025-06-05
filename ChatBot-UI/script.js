@@ -36,7 +36,19 @@ function addMessage(message, isUser = false) {
     messageDiv.scrollIntoView({ behavior: 'smooth' });
 }
 
-function handleSend() {
+// Add loading indicator to message
+function addLoadingMessage() {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message bot';
+    messageDiv.innerHTML = '<div class="loading">Thinking...</div>';
+    
+    const chatMessages = document.querySelector('.chat-messages');
+    chatMessages.appendChild(messageDiv);
+    messageDiv.scrollIntoView({ behavior: 'smooth' });
+    return messageDiv;
+}
+
+async function handleSend() {
     const chatInput = document.querySelector('.chat-input');
     const sendButton = document.querySelector('.send-button');
     const message = chatInput.value.trim();
@@ -45,16 +57,28 @@ function handleSend() {
         // Disable send button while processing
         sendButton.disabled = true;
         
-        // Add user message
-        addMessage(message, true);
-        chatInput.value = '';
-        
-        // Re-enable send button
-        sendButton.disabled = false;
-        
-        // Reset input height
-        chatInput.style.height = 'auto';
-        chatInput.style.height = Math.min(chatInput.scrollHeight, parseInt(getComputedStyle(chatInput).maxHeight)) + 'px';
+        try {
+            // Add user message
+            addMessage(message, true);
+            chatInput.value = '';
+            
+            // Add loading message
+            const loadingMessage = addLoadingMessage();
+            
+            // TODO: Add integration with Python backend here
+            // For now, just remove the loading message after a short delay
+            setTimeout(() => {
+                loadingMessage.remove();
+                addMessage("Backend integration pending. Your message was: " + message);
+            }, 500);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage("Sorry, I encountered an error. Please try again.");
+        } finally {
+            // Re-enable send button
+            sendButton.disabled = false;
+        }
     }
 }
 
