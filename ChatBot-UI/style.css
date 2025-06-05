@@ -64,8 +64,8 @@ body {
 }
 
 .logo-icon {
-    width: 47px;
-    height: 44px;
+    width: 50px;
+    height: 40px;
     border-radius: 6px;
     overflow: hidden;
     display: flex;
@@ -237,8 +237,8 @@ body {
 
 .message {
     margin-bottom: 1rem;
-    padding: 1rem;
-    border-radius: 16px;
+    padding: 0.75rem;
+    border-radius: 14px;
     max-width: 70%;
     word-wrap: break-word;
 }
