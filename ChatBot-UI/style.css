@@ -516,4 +516,152 @@ body::before {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .main-content {
+        margin-left: 0;
+        transition: filter 0.3s ease;
+    }
+
+    /* Blur main content when sidebar is active */
+    .sidebar.active ~ .main-content {
+        filter: blur(5px);
+        pointer-events: none;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1001;
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .header {
+        z-index: 1000;
+    }
+
+    [data-theme="light"] .sidebar {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Add overlay when sidebar is active */
+    .sidebar.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+    }
+
+    [data-theme="light"] .sidebar.active::before {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add hamburger menu button */
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        margin-right: 1rem;
+        padding: 0;
+    }
+
+    .menu-toggle svg {
+        width: 24px;
+        height: 24px;
+        color: var(--text-color);
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0 1rem;
+    }
+
+    .logo span {
+        display: none;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 32px;
+    }
+
+    .chat-messages {
+        padding: 0.5rem;
+    }
+
+    .message {
+        max-width: 85%;
+        padding: 0.625rem;
+        font-size: 0.9375rem;
+    }
+
+    .chat-input-container {
+        padding: 0.75rem;
+    }
+
+    .chat-input {
+        padding: 0.75rem 3.5rem 0.75rem 0.75rem;
+        font-size: 0.9375rem;
+        min-height: 3rem;
+    }
+
+    .send-button {
+        right: 0.5rem;
+        bottom: 0.7rem;
+        width: 28px;
+        height: 28px;
+    }
+
+    .send-button svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-icon {
+        width: 40px;
+        height: 32px;
+    }
+
+    .message {
+        max-width: 90%;
+        font-size: 0.875rem;
+    }
+
+    .chat-input {
+        font-size: 0.875rem;
+    }
 } 
