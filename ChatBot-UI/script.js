@@ -140,4 +140,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize height on page load
     chatInput.style.height = 'auto';
     chatInput.style.height = Math.min(chatInput.scrollHeight, parseInt(getComputedStyle(chatInput).maxHeight)) + 'px';
+
+    // Mobile menu toggle functionality
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('active') &&
+                !sidebar.contains(e.target) &&
+                !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Close sidebar when window is resized to desktop view
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1025) {
+                sidebar.classList.remove('active');
+            }
+        });
+    }
 }); 
